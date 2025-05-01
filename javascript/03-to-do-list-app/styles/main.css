@@ -1,0 +1,13 @@
+.strike {
+    text-decoration: line-through;
+}
+.display {
+    display: none;
+    
+}
+.nodisplay{
+    color: red;
+}
+.card__list {
+    list-style-type: none ;
+}
