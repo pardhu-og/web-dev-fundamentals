@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Pyramid</title>
+</head>
+<body>
+    <script>
+      let num = prompt("enter number");
+      
+      for (y =1; y<=num; y++) {
+        let star = "";
+        let space = "";
+        for (x =1; x<=2*y-1; x++){
+          star = star + "*";
+        }
+        
+        for (z = num-y; z >= 0; z--){
+          space = space + " "
+        }
+        
+        console.log(space + star);
+      }     
+    </script>
+</body>
+</html>
