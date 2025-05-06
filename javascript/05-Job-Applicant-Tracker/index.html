@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Applicant Tracker</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <div class="container">
+        <h1>Job Applicant Tracker</h1>
+    
+
+    <!-- Filter Buttons -->
+    <div class="filters">
+      <button onclick="renderApplicants('All')">All</button>
+      <button onclick="renderApplicants('Shortlisted')">Shortlisted</button>
+      <button onclick="renderApplicants('Rejected')">Rejected</button>
+      <button onclick="renderApplicants('Pending')">Pending</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats" id="stats"></div>
+
+    <!-- Applicant List -->
+    <div id="applicant-list"></div>
+
+    <!-- Add Applicant Form -->
+    <form id="applicant-form">
+      <h2>Add New Applicant</h2>
+      <input type="text" id="name" placeholder="Name" required />
+      <input type="text" id="role" placeholder="Role" required />
+      <input type="number" id="experience" placeholder="Experience (years)" required />
+      <button type="submit">Add Applicant</button>
+    </form>
+  </div>
+
+  <script src="scripts/script.js"></script>
+</body>
+</html>
