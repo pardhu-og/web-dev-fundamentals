@@ -1,0 +1,94 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: cursive;
+}
+
+h1 {
+ color: rgb(80, 76, 76);
+}
+
+.main_page {
+    width: 70%;
+    padding: 3%;
+    margin: auto;
+    margin-top: 3%;
+    border-radius: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    text-align: center;
+    background-color: whitesmoke;
+    
+}
+
+.textdisp {
+    
+    min-height: 50vh;
+    width: 90%;
+    padding: 3%;
+    margin: auto;
+    margin-top: 10px;
+    text-align: left;
+    font-size: larger;
+    border-radius: 20px;
+    
+    
+    
+}
+
+#notes {
+    margin-top: 2%;
+    padding: 3%;
+    width: 90%;
+    border: none;
+    resize: none;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    
+    
+}
+
+.dltbtn {
+    padding: 0px 4px;
+    border: none;
+    text-align: center;
+    transition: transform 0.2s ease;
+    border-radius: 5px;
+    position: absolute;
+    right: 10px;
+    top: 5px
+    
+
+
+}
+
+.dltbtn:hover {
+    transform: scale(1.1);
+    background-color: rgb(167, 29, 103);
+    cursor: pointer;
+    color: white;
+}
+
+.lines {
+    background-color: rgb(253, 253, 249);
+    margin: 2px;
+    padding: 3%;
+    border-radius: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    position: relative;     
+}
+
+#btn {
+    border: none;
+    box-shadow: rgba(237, 15, 15, 0.55) 0px 2px 5px -1px, rgba(237, 15, 15, 0.55) 0px 1px 3px -1px;
+    margin-top: 3%;
+    padding: 1%;
+    border-radius: 5px;
+    background-color:white;
+    transition: all 0.3s ease;
+}
+
+#btn:hover {
+        transform: scale(1.1);
+        color: rgb(229, 218, 218);
+        background-color: rgba(237, 15, 15, 0.55);
+}
