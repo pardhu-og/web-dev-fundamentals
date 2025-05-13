@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary App</title>
+    
+</head>
+<body>
+    <h1>Dictionary App</h1>
+    <input type="text" id="word">
+    <button id="button">Click</button>
+    <div class="dsp_area"></div>
+
+    <script>
+        const input = document.querySelector("#word")
+        const disp = document.querySelector(".dsp_area")
+
+        const work = async function(){
+            try {
+                if (input.value.trim() ===``) {
+                    disp.innerHTML =`<h2 style="color: red">First Type a word</h2>`
+                } else {
+                    disp.innerHTML =`<h2 style="color: red">Loading...</h2>`
+                const resolve = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${input.value}`)
+                if (!resolve.ok) {
+                    disp.innerHTML = `<h2 style="color: red">" ${input.value} " is not a valid word, type a valid Word</h2>`
+                    input.value =``
+                    throw new Error ("Pardhu cannot connect to server")
+                }
+                else {
+                    const data = await resolve.json()
+                console.log(data[0])
+                const partsofspeech = data[0].meanings.map(p => p.partOfSpeech).join(", ")
+                const phonetics = data[0].phonetics
+                const definitions = data[0].meanings.map(p => p.definitions.map(p =>p.definition)).flat(Infinity).join("<br><br>")
+
+
+//displaying 
+disp.innerHTML = `<h2>${data[0].word}</h2>
+                  <p> Parts of Speech: ${partsofspeech}</p>
+                  <p> Phonetics: ${phonetics[0].text || null || phonetics[1].text} <br><br><audio controls  src=${phonetics[0].audio || null || phonetics[1].audio}></audio></p>
+                  <p>${definitions}</p>`
+ input.value =``
+                }
+                }
+            }    
+            catch (err) {console.log(err)}
+        }
+
+
+        document.querySelector("#button").addEventListener("click", function(){
+            work ()
+        })
+        
+        document.querySelector("#word").addEventListener("keydown", function(){
+            if (event.key === "Enter") {
+                work ()
+            }
+        })
+
+    </script>
+</body>
+</html>
