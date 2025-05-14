@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Covertor</title>
+</head>
+<body>
+    <fieldset>
+        <legend>Input Currency</legend>
+        <label for="input">Input</label>
+    <input type="number" id="input">
+    <select  id="base">
+        <option value="" selected disabled>Select one</option>
+    </select>
+    </fieldset>
+
+
+   <fieldset>
+    <legend>Output Currency</legend>
+     <label>Output:</label>
+    <select  id="tocurr">
+        <option value="" selected disabled>Select one</option>
+    </select>
+    <button id="btn">Convert</button> <button id="swap">Swap</button>
+    <div class="disp">
+    </div>
+   </fieldset>
+
+   <script>
+        const ipselectcontainer = document.querySelector("#base")
+        const opselectcontainer = document.querySelector("#tocurr")
+        const inputvalue = document.querySelector("#input")
+        const btn = document.querySelector("#btn")
+        const disp = document.querySelector(".disp")
+        const gettingcurr = async function (){
+            try {
+                disp.innerHTML =`<h3 style = "color: red;">Loading...</h3>`
+                const res = await fetch ("https://open.er-api.com/v6/latest/INR")
+
+                if (!res.ok) {
+                    throw new Error ("Cant reach the server")
+                }
+
+                const data = await res.json();
+                const abb = Object.keys(data.rates)
+                abb.forEach(p =>{
+                    const newElement = document.createElement("option")
+                    newElement.setAttribute("value",`${p}`)
+                    newElement.textContent = `${p}`
+                    ipselectcontainer.appendChild(newElement)  
+                    
+                })
+
+                abb.forEach(p =>{
+                    const newElement = document.createElement("option")
+                    newElement.setAttribute("value",`${p}`)
+                    newElement.textContent = `${p}`
+                    opselectcontainer.appendChild(newElement)})
+
+             disp.innerHTML =`<h3 style = "color: red;">Please Enter the Values</h3>`
+            } catch (err) {console.log(err)}
+        }
+        
+        gettingcurr ()
+
+        // swapping logic
+        const swapbtn = document.querySelector("#swap")
+        swapbtn.addEventListener("click",function(){
+            let x = ipselectcontainer.value;
+            ipselectcontainer.value = opselectcontainer.value;
+            opselectcontainer.value = x
+            
+        })
+
+
+        // actual calculation starts here 
+             btn.addEventListener("click", async function(){
+                    try { 
+                        if (ipselectcontainer.value === "") {
+                            disp.innerHTML =`<h3 style = "color: red;">Please Select base currency</h3>`
+                            throw new Error ("Didn't select base currency so aborting")
+                            
+                        }
+                        else if (opselectcontainer.value === "") {
+                            disp.innerHTML =`<h3 style = "color: red;">Please Select Output currency</h3>`
+                            throw new Error ("Didn't select Output currency so aborting") 
+                        } else if (input.value === "")  {
+                             disp.innerHTML =`<h3 style = "color: red;">Please Select amount of currency</h3>`
+                            throw new Error ("Didn't select amount of currency, so aborting")
+                        } else if (input.value < 0) {
+                            disp.innerHTML =`<h3 style = "color: red;">Can't Input negative values</h3>`
+                            throw new Error ("Selected negative values, so aborting")
+                        }               
+                        else {
+                            disp.innerHTML =`<h3 style = "color: red;">Loading...</h3>`
+                            const res = await fetch(`https://open.er-api.com/v6/latest/${ipselectcontainer.value}`)
+                            if (!res.ok) {
+                               throw new Error ("Cant reach the server")
+                            }
+
+                            const data = await res.json();
+                            
+                            const rate = data.rates[opselectcontainer.value.trim()]
+                        
+                           const output = Number(input.value) * (rate)
+                        
+                           disp.textContent =""
+
+                           const newElement2 = document.createElement("h4")
+                           newElement2.textContent = `1 ${ipselectcontainer.value} = ${rate} ${opselectcontainer.value}`
+                           disp.appendChild(newElement2)
+
+                           const newElement = document.createElement("h3")
+                           newElement.textContent = `${input.value} ${ipselectcontainer.value} is equal to ${output} ${opselectcontainer.value}`
+                           disp.appendChild(newElement);
+
+                           
+                        }
+                    } catch (err) {console.error(err)}
+                    
+                })
+   </script>
+
+
+</body>
+</html>
