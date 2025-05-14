@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News App</title>
+    <style>
+        * {
+            margin:0px;
+            padding: 0px;
+        }
+        .container {
+           width: 80%;
+           min-height: 90vh;
+           margin: 2%;
+           padding: 2%;
+           box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+           border-radius: 20px;
+           margin: auto;
+        }
+
+        .pannels {
+            display: flex;
+            flex-direction: column;
+            gap: 10%;
+        }
+
+        .pannels > div {
+            padding: 2%;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Latest News</h1>
+        <div class="pannels">
+
+        </div>
+    </div>
+
+    <script>
+        const pannelsCont = document.querySelector(".pannels")
+        pannelsCont.textContent = ``
+        const mega = async function(){
+            try { 
+                pannelsCont.innerHTML = `<p style = "color: red">Loading...` 
+                const resp = await fetch  ("https://newsdata.io/api/1/news?apikey=pub_86914d2584ecb14435e737430ff3228b46b56&country=in&language=en")
+                
+                
+                    if (!resp.ok) {
+                        pannelsCont.textContent = `No Article are found Retry later`
+                        throw new Error ("Server didnt resond")
+                        
+                    }
+            const data = await resp.json();
+            pannelsCont.textContent = ``
+            data.results.forEach(p => {
+                const title = p.title;
+                const source = p.source_name;
+                const time = p.pubDate;
+                const des = p.description;
+                const link = p.link;
+
+                //appending the articles
+
+                const newElement = document.createElement("div")
+                newElement.innerHTML = 
+                        `<h3>${title}</h3>
+                        <h4>Source: ${source}</h4>
+                        <p>Time Published: ${time}</p>
+                        <h4>Description:</h4>
+                        <p> ${des}</p>
+                        <a href = "${link}" target="_blank" rel="noopener noreferrer"> View Article </a>
+                        `
+                
+                pannelsCont.appendChild(newElement)
+            })
+            }
+
+            catch (err) {console.log(err)}
+        }
+
+        mega ();
+    </script>
+</body>
+</html>
+
