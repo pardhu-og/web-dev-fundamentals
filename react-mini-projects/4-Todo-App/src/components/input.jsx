@@ -1,4 +1,3 @@
-// input.jsx
 
 import { useState } from "react";
 
