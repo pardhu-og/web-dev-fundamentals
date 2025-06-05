@@ -1,22 +1,9 @@
-//DOMs.jsx
-import { useState } from "react"
+//DOM.jsx
 
-export function ProfileCard(props){
- const [visible, setVisibility] = useState(false);
-
-  return (
-    <div style={{backgroundColor:`${props.color}`, border: `2px solid black` , margin: "5px", padding: "5px"}}>
-      <h3>Name: {props.name}</h3>
-      <p>Role: {props.role}</p>
-      <button onClick={() => setVisibility (!visible)}>{visible?"Hide Info":"More Info"}</button>
-      {visible && props.children}
-  
-  </div>
-  )
+export  function ChildA({ count, setCount }) {
+  return <button onClick={() => setCount(count + 1)}>Increase</button>;
 }
 
-export function Individual (props){
- return <p>Description: {props.description}</p>
+export  function ChildB({ count }) {
+  return <h2>Current Count: {count}</h2>;
 }
-
-
