@@ -36,19 +36,19 @@ This project was built as part of foundational React and Tailwind learning. It f
 
 ## Folder Structure
 
-src
-├── components
-│ ├── Navbar.jsx
-│ └── Products.jsx
-├── contexts
-│ └── Cartcontext.js
-├── images
-├── pages
-│ ├── Checkout.jsx
-│ └── Conformation.jsx
-├── App.jsx
-├── main.jsx
-└── index.css
+src 
+├── components 
+│ ├── Navbar.jsx 
+│ └── Products.jsx 
+├── contexts 
+│ └── Cartcontext.js 
+├── images 
+├── pages  
+│ ├── Checkout.jsx 
+│ └── Conformation.jsx 
+├── App.jsx 
+├── main.jsx 
+└── index.css 
 
 ---
 
